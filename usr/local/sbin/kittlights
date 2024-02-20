@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+#  Simulates the (in)famous David Hasselhoff's[1] KITT[2] supercar's[3] front
+# lights on the keyboard in tty12 to show that the server is operational, like
+# old mainframes did: useful when the monitor is permanently switched off.
+#
+# Note: to make this utility being automatically started at system's boot
+#       use the insserv(8) utility on /etc/init.d/kittlights, which is a
+#       custom script built to avoid hanging the system by the daemon it
+#       starts ('cause of the daemon's infinite loop).
+#
+# Remember: the problem, at boot, is into the starting script, not here, so I
+#       modified that.
+#
+# Why tty12: I wrote this little utility to remember whoever got around the
+#       server that it was RUNNING, so to avoid switching it off pulling the
+#       power cable, cleaning it's keyboard and so on.
+#        As I'm used to configure syslog's facility to show all it's records
+#       to tty12 (so, when something goes wrong, like having an OOPS, I've just
+#       to switch my monitor on), I directed this script's output there (but
+#       you can configure to have it at the tty you prever, obviously).
+#
+#  This is a monolithic all-in-one utility, with just a defaults starting
+# parameters file (look into /etc/defaults/) and a (modified) starter script
+# to make it to start at system's boot (look into /etc/init.d/)
+#
+# 20090131 - Luca "Sky" Coianiz
+#
+# Refs
+# [1] https://en.wikipedia.org/wiki/David_Hasselhoff
+# [2] https://en.wikipedia.org/wiki/KITT
+# [3] https://en.wikipedia.org/wiki/Knight_Rider_%281982_TV_series%29
+
+# ___Chngelog___
+#
+# 20160602      1.0.3.3         Luca Coianiz <luca@coianiz.it>
+# .3 * got it into *nix shell architecture: set PATH to include needed dirs and set -e to exit on error
+#
+# 20160416      1.0.2.2         Luca Coianiz <luca@coianiz.it>
+# .2 * reworked finding the executables using find and sed (to "normalize" the PATH)
+#
+# 20140831      1.0.1.1         Luca Coianiz <luca@coianiz.it>
+# .1 ! current Bash seems having problems finding executables, so given a static path
+#
+# 20090131      1.0.0.0         Luca Coianiz <luca@coianiz.it>
+# .0 + initial version
+
+set -e
+
+PATH=/bin:/usr/bin
+
+DLY="1"                                                                         # "scanner" delay
+TTY="/dev/tty12"                                                                # Where to work
+
+#  Begin an infinite loop which repeatedly clear/sets the kbd leds
+while true; do
+    setleds +num -caps -scroll < $TTY                                           # O . .
+    sleep $DLY
+    setleds -num +caps -scroll < $TTY                                           # . O .
+    sleep $DLY
+    setleds -num -caps +scroll  < $TTY                                          # . . O
+    sleep $DLY
+    setleds -num +caps -scroll  < $TTY                                          # . O .
+    sleep $DLY
+done                                                                            # and so on...

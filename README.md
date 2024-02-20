@@ -28,6 +28,9 @@ to make it to start at system's boot (look into /etc/init.d/)
 20090131 - Luca "Sky" Coianiz
 
 Refs
+
 [1] https://en.wikipedia.org/wiki/David_Hasselhoff
+
 [2] https://en.wikipedia.org/wiki/KITT
+
 [3] https://en.wikipedia.org/wiki/Knight_Rider_%281982_TV_series%29

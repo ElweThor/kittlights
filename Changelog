@@ -1,0 +1,11 @@
+20160602  1.0.3.3  Luca "Sky" Coianiz <sky@coianiz.it>
+.3 * got it into *nix shell architecture: set PATH to include needed dirs and set -e to exit on error
+
+20160416  1.0.2.2  Luca "Sky" Coianiz <sky@coianiz.it>
+.2 * reworked finding the executables using find and sed (to "normalize" the PATH)
+
+20140831  1.0.1.1  Luca "Sky" Coianiz <sky@coianiz.it>
+.1 ! current Bash seems having problems finding executables, so given a static path
+
+20090131  1.0.0.0  Luca "Sky" Coianiz <sky@coianiz.it>
+.0 + initial version

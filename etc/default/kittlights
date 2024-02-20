@@ -1,0 +1,13 @@
+# This file will be used to declare some vars for kittlights
+#
+# Uncomment the following if you don't want localized log messages
+# export LC_ALL=C
+
+# If you want to specify any additional OPTION to the start
+# scripts specify them here
+# OPTIONS=...
+
+# Declare here if we want to start kittlights: 'yes'|'no'
+#START_DAEMON=no
+#20160602=LC enabled after deeper check and fix
+START_DAEMON=yes
